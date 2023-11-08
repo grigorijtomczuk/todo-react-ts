@@ -1,10 +1,20 @@
 import { useState } from "react";
 
 export default function TodoList() {
-	const [todos, setTodos] = useState<Item[]>([]);
+	const [todos, setTodos] = useState<TodoListItem[]>([]);
 	const [input, setInput] = useState<string>("");
 
-	interface Item {
+	// Populate the list
+	// useEffect(() => {
+	// 	const newTodos: Array<TodoListItem> = [];
+	// 	for (let index = 1; index <= 30; index++) {
+	// 		const newTodo: TodoListItem = { id: index, text: `List Item #${index}`, completed: false };
+	// 		newTodos.push(newTodo);
+	// 	}
+	// 	setTodos([...todos, ...newTodos]);
+	// }, []);
+
+	interface TodoListItem {
 		id: number;
 		text: string;
 		completed: boolean;
@@ -22,7 +32,7 @@ export default function TodoList() {
 	}
 
 	function handleClick() {
-		const newTodo: Item = { id: Date.now(), text: input, completed: false };
+		const newTodo: TodoListItem = { id: Date.now(), text: input, completed: false };
 		setTodos([...todos, newTodo]);
 		setInput("");
 	}
@@ -40,7 +50,10 @@ export default function TodoList() {
 								onClick={() => {
 									handleToggle(todo.id);
 								}}
-								style={{ textDecoration: todo.completed ? "line-through" : "none" }}
+								style={{
+									textDecoration: todo.completed ? "line-through 2px" : "none",
+									color: todo.completed ? "#999999" : "inherit",
+								}}
 							>
 								{todo.text}
 							</li>
