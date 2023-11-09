@@ -32,8 +32,11 @@ export default function TodoList() {
 	}
 
 	function handleClick() {
-		const newTodo: TodoListItem = { id: Date.now(), text: input, completed: false };
-		setTodos([...todos, newTodo]);
+		// Add item only if input consists of at least one non-whitespace character
+		if (input.trim()) {
+			const newTodo: TodoListItem = { id: Date.now(), text: input.trim(), completed: false };
+			setTodos([...todos, newTodo]);
+		}
 		setInput("");
 	}
 
